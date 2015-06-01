@@ -1,5 +1,10 @@
 <?php
 session_start();
+
+function getPost ($param, $default = false) {
+    	return isset ($_POST[$param]) ? $_POST[$param] : $default;
+    }
+
 function addUser($name, $pass) {
 	if (filesize('users.txt') < 1) $usrs = array();
 	else $usrs = unserialize(file_get_contents('users.txt'));
@@ -21,13 +26,14 @@ function addUser($name, $pass) {
 	}
 	else return false;
 }
+
 ?>
 </html>
 <head>
 <title>Registration</title>
 </head>
 <body>
-<form>
+<form method="POST">
 Name: <input type="text" name="name"><br>
 Password: <input type="text" name="password"><br>
 <input type="submit" name="submit" value="OK" /><br>
@@ -41,7 +47,8 @@ include('library/db.php');
 include('library/createUser.php');
 
 
-if (createUser(getConnect(), $_GET["name"], $_GET["password"])) echo "You are registered!  ";
+if (getPost ("name") && getPost("password") && createUser(getConnect(), $_POST["name"], $_POST["password"])) 
+	echo "You are registered!  ";
  
 ?>
 <a href="index.php">Back</a>

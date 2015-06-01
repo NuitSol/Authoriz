@@ -22,8 +22,9 @@ function createWish($db, $id_user, $wish){
 //$db = new PDO ("mysql:host=localhost; dbname='db', 'root', 'password');
 	$res = array();
 
-	$query2 = $db->prepare("SELECT wish_text FROM wish WHERE wish_text = :wish");
+	$query2 = $db->prepare("SELECT wish_text FROM wish WHERE wish_text = :wish AND id_user = :id_user");
 	$query2->bindParam(':wish', $wish, PDO::PARAM_STR);
+	$query2->bindParam(':id_user', $id_user, PDO::PARAM_STR);
 
 	$query2->execute();
 	while ($row = $query2->fetch(PDO::FETCH_ASSOC)) {
