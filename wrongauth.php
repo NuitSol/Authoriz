@@ -5,13 +5,13 @@
 <body>
 
 <?php
-include('/var/library/db.php');
-include('/var/library/createUser.php');
-include('/var/library/userList.php');
-include('/var/library/editUser.php');
-include('/var/library/getVisits.php');
-include('/var/library/createWish.php');
-include('/var/library/getWish.php');
+include('library/db.php');
+include('library/createUser.php');
+include('library/userList.php');
+include('library/editUser.php');
+include('library/getVisits.php');
+include('library/createWish.php');
+include('library/getWish.php');
 //mysqli
 
 /*$config = parse_ini_file('config/db.ini');
@@ -43,8 +43,8 @@ while ($row = mysqli_fetch_assoc($result)) {
 //createWish(getConnect(), 1, 'car');
 //var_dump(getWishList(getConnect(), 1));
 //var_dump(getVisits(getConnect(), 'Evg'));
-	var_dump(getUserList(getConnect()));
-
+//	var_dump(getUserList(getConnect()));
+echo "You are here";
 
 ?>
 </body>

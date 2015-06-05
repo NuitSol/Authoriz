@@ -17,7 +17,7 @@ include('library/getWish.php');
 
 $user = array();
 $user = getUser(getConnect(), $_SESSION['userName']);
-if (empty($user)) header("Location: /index.php");
+if (empty($user)) header("Location: /iregistration.php");
 echo "Hello, {$_SESSION['userName']}! This is your {$user[0]["visits"]} visit.";
 
 //getUser();
@@ -25,6 +25,8 @@ echo "Hello, {$_SESSION['userName']}! This is your {$user[0]["visits"]} visit.";
 ?>
 <form method="POST">
 <a href="index.php?action=logout">Exit</a><br>
+<br>
+You can look at our <a href="events.php">events.</a><br>
 <br>
 Make a wish:
 <input type="text" name="want">

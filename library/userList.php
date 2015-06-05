@@ -15,8 +15,6 @@ function getUserList($db) {
 
 function checkUser ($db, $name, $pass) {
 	$res = array();
-	//$hash_pass = password_hash($pass, PASSWORD_DEFAULT);
-	//var_dump($hash_pass);
 
 	$query2 = $db->prepare("SELECT password FROM user WHERE name = :name");
 	$query2->bindParam(':name', $name, PDO::PARAM_STR);
@@ -25,14 +23,12 @@ function checkUser ($db, $name, $pass) {
 	while ($row = $query2->fetch(PDO::FETCH_ASSOC)) {
 			$res[] = $row;
 	}
-//	var_dump($res[0]["password"]);
-//	var_dump(crypt($pass, 'CRYPT_SHA256'));
-//	var_dump($res);
-	if(!empty($res) && $res[0]['password'] == crypt($pass, 'CRYPT_SHA256')) {
+
+
+	if (!empty($res) && $res[0]['password'] == crypt($pass, 'CRYPT_SHA256')) {
 		editUser(getConnect(), $name);
-			return true;
+			return 1;
 	}
-	else {
-		return false;
-	}
+	
+	return 0;
 }			
