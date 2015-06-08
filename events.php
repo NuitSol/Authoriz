@@ -20,13 +20,14 @@ $res = getEventList(GetConnect());
 $res2 = array();
 for ($i = 0; $i < count($res); $i++) {
 $vas = $res[$i]["name"];
-echo "<option value=\"$vas\">
+echo "<option value=\"$i\">
         $vas
     </option>";
 } ?>
 </select>:<br />
 <?php
 var_dump($res);
-echo $_POST["education"];
+echo $i;
+
 ?>
 </html>

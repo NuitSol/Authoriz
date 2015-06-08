@@ -40,7 +40,7 @@ include('library/userList.php');
 include('library/editUser.php');
 
 
-$users = array();
+//$users = array();
 $users = getUserList(getConnect());
 $redis = new Redis();
 $redis->connect('127.0.0.1', 6379);
@@ -53,7 +53,7 @@ if (getPost ("name")) {
 	if($redis->get("banned_{$_POST["name"]}")) echo "You are banned for 10 sec.<br>";
 	
 	else {
-		$user_bankey = "user_pass_attemps_" . $_POST["name"];
+		$user_bankey = "user_pass_attempts_" . $_POST["name"];
 		if (!$redis->get("banned_{$_POST["name"]}") && getPost("password") && checkUser(getConnect(), $_POST["name"], $_POST["password"])) {
 			$_SESSION['userName'] = $_POST["name"];
 			header("Location: /loggedin.php");
@@ -76,14 +76,14 @@ if (getPost ("name")) {
 }
 else {
 	if (!$redis->get("anonymous")) {
-		$value = $redis->incr("user_pass_attemps_anonymous");
-		if ($value == 1) $redis->setTimeout("user_pass_attemps_anonymous", 10);
+		$value = $redis->incr("user_pass_attempts_anonymous");
+		if ($value == 1) $redis->setTimeout("user_pass_attempts_anonymous", 10);
 		if ($value > 3) {
 			$redis->set("baned", "anonymous");
 			$redis->set("anonymous",'true');
 			$redis->setTimeout("anonymous", 10);
 		}
-//		$redis->set("user_pass_attemps_anonymous", 0);
+//		$redis->set("user_pass_attempts_anonymous", 0);
 //		echo $value;
 	}
 	else echo "You are banned for 10 sec.";

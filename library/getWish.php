@@ -1,4 +1,8 @@
 <?php
+/**
+ * @param PDO $db
+ * @param int $id_user
+ * @return mixed */
 function getWishList($db, $id_user) {
 	$res = array();
 	$query = $db->prepare("SELECT wish_text FROM wish WHERE id_user = :id_user");

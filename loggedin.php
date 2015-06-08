@@ -17,7 +17,7 @@ include('library/getWish.php');
 
 $user = array();
 $user = getUser(getConnect(), $_SESSION['userName']);
-if (empty($user)) header("Location: /iregistration.php");
+if (empty($user)) header("Location: /index.php");
 echo "Hello, {$_SESSION['userName']}! This is your {$user[0]["visits"]} visit.";
 
 //getUser();
